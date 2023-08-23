@@ -1,0 +1,94 @@
+<h2>Leave Applications</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Employee ID</th>
+            <th>Employee Name</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Total Days</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="6">
+                <h3>Approved</h3>
+                <table class="sub-table">
+                    <!-- <tr>
+                        <th>Employee ID</th>
+                        <th>Employee Name</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Total Days</th>
+                        <th>Action</th>
+                    </tr> -->
+                    <tr *ngFor="let application of leaveApplications; let i = index"
+                        [ngClass]="{'APPROVED': application.status === 'APPROVED'}">
+                        <ng-container *ngIf="application.status === 'APPROVED'">
+                            <td>{{ application.id }}</td>
+                            <td>{{ application.employeeName }}</td>
+                            <td>{{ application.fromDate | date }}</td>
+                            <td>{{ application.toDate | date }}</td>
+                            <td>{{ application.totalDays }}</td>
+                            <td>
+                                <button class="btn btn-danger" (click)="cancelLeave(application)">Cancel</button>
+                            </td>
+                        </ng-container>
+                    </tr>
+                </table>
+
+                <h3>Canceled</h3>
+                <table class="sub-table">
+                    <!-- <tr>
+                        <th>Employee ID</th>
+                        <th>Employee Name</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Total Days</th>
+                        <th>Action</th>
+                    </tr> -->
+                    <tr *ngFor="let application of leaveApplications; let i = index"
+                        [ngClass]="{'REJECTED': application.status === 'REJECTED'}">
+                        <ng-container *ngIf="application.status === 'REJECTED'">
+                            <td>{{ application.id }}</td>
+                            <td>{{ application.employeeName }}</td>
+                            <td>{{ application.fromDate | date }}</td>
+                            <td>{{ application.toDate | date }}</td>
+                            <td>{{ application.totalDays }}</td>
+                            <td>
+                                <!-- Actions for Approved applications -->
+                            </td>
+                        </ng-container>
+                    </tr>
+                </table>
+
+                <h3>Pending</h3>
+                <table class="sub-table">
+                    <!-- <tr>
+                        <th>Employee ID</th>
+                        <th>Employee Name</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Total Days</th>
+                        <th>Action</th>
+                    </tr> -->
+                    <tr *ngFor="let application of leaveApplications; let i = index">
+                        <ng-container *ngIf="application.status === ''">
+                            <td>{{ application.id }}</td>
+                            <td>{{ application.employeeName }}</td>
+                            <td>{{ application.fromDate | date }}</td>
+                            <td>{{ application.toDate | date }}</td>
+                            <td>{{ application.totalDays }}</td>
+                            <td>
+                                <button class="btn btn-danger" (click)="cancelLeave(application)">Cancel</button>
+                                <button class="btn btn-danger" (click)="approveLeave(application)">Approve</button>
+                            </td>
+                        </ng-container>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
